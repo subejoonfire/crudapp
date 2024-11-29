@@ -1,0 +1,16 @@
+@model crudapp.Models.Unit
+
+<h1>Hapus Unit</h1>
+
+<div>
+    <h2>@Model.NamaUnit</h2> <!-- Mengganti Title dengan NamaUnit -->
+    <p>Jenis Unit: @Model.JenisUnit</p> <!-- Mengganti Author dengan JenisUnit -->
+    <p>Kapasitas: @Model.Kapasitas</p> <!-- Mengganti ISBN dengan Kapasitas -->
+    <p>Apakah Anda yakin ingin menghapus unit ini?</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Hapus</button>
+    <a href="@Url.Action("Index", "Unit")" class="btn btn-secondary">Batal</a>
+</form>

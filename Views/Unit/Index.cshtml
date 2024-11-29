@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Daftar Unit";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<a asp-action="Create" class="btn btn-primary">Tambah Unit Baru</a>
+
+<hr />
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nama Armada</th>
+            <th>Jenis Unit</th>
+            <th>Kapasitas</th>
+            <th>NoPol</th>
+            <th>Sarana</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var unit in Model)
+        {
+            <tr>
+                <td>@unit.NamaUnit</td>
+                <td>@unit.JenisUnit</td>
+                <td>@unit.Kapasitas</td>
+                <td>@unit.NoPol</td>
+                <td>@unit.Sarana</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@unit.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@unit.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>

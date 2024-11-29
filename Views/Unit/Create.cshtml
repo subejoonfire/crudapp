@@ -1,0 +1,48 @@
+@model crudapp.Models.Unit
+
+@{
+    ViewData["Title"] = "Tambah Unit";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a asp-action="Create" class="btn btn-primary">Tambah Unit Baru</a>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="NamaUnit" class="control-label"></label>
+                <input asp-for="NamaUnit" class="form-control" />
+                <span asp-validation-for="NamaUnit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JenisUnit" class="control-label"></label>
+                <input asp-for="JenisUnit" class="form-control" />
+                <span asp-validation-for="JenisUnit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kapasitas" class="control-label"></label>
+                <input asp-for="Kapasitas" class="form-control" />
+                <span asp-validation-for="Kapasitas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoPol" class="control-label"></label>
+                <input asp-for="NoPol" class="form-control" />
+                <span asp-validation-for="NoPol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sarana" class="control-label"></label>
+                <input asp-for="Sarana" class="form-control" />
+                <span asp-validation-for="Sarana" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Kembali ke Daftar Unit</a>
+</div>

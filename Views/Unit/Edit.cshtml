@@ -1,0 +1,28 @@
+@model crudapp.Models.Unit
+<h2>Edit Unit</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label for="NamaUnit">Nama Unit</label>
+        <input type="text" class="form-control" id="NamaUnit" name="NamaUnit" value="@Model.NamaUnit" />
+    </div>
+    <div class="form-group">
+        <label for="JenisUnit">Jenis Unit</label>
+        <input type="text" class="form-control" id="JenisUnit" name="JenisUnit" value="@Model.JenisUnit" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Kapasitas" class="control-label"></label>
+        <input asp-for="Kapasitas" class="form-control" />
+        <span asp-validation-for="Kapasitas" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="NoPol">NoPol</Noframes></label>
+        <input type="text" class="form-control" id="NoPol" name="NoPol" value="@Model.NoPol" />
+    </div>
+    <div class="form-group">
+        <label for="Sarana">Sarana</Noframes></label>
+        <input type="text" class="form-control" id="Sarana" name="Sarana" value="@Model.Sarana" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+</form>

@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Form Pemesanan Unit";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Daftar Unit</h1>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nama Unit</th>
+            <th>Jenis Unit</th>
+            <th>Kapasitas</th>
+            <th>NoPol</th>
+            <th>Sarana</th>
+            <th>Isi Sarana</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var unit in Model)
+        {
+            <tr>
+                <td>@unit.NamaUnit</td>
+                <td>@unit.JenisUnit</td>
+                <td>@unit.Kapasitas</td>
+                <td>@unit.NoPol</td>
+                <td>@unit.Sarana</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="@Url.Action("PilihPenumpang", "Unit", new { id = unit.Id })">
+                        Pilih
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+@model crudapp.Models.Unit
+
+<h1>Detail Unit</h1>
+
+<div>
+    <h2>@Model.NamaUnit</h2>
+    <p>Jenis Unit: @Model.JenisUnit</p>
+    <p>Kapasitas: @Model.Kapasitas</p>
+    <p>Status Tersedia: @(Model.IsAvailable ? "Tersedia" : "Tidak Tersedia")</p>
+    <p>NoPol: @Model.NoPol</p>
+    <p>Sarana: @Model.Sarana</p>
+
+</div>
+
+<a href="@Url.Action("Edit", "Unit", new { id = Model.Id })" class="btn btn-primary">Edit</a>
+<a href="@Url.Action("Delete", "Unit", new { id = Model.Id })" class="btn btn-danger">Delete</a>

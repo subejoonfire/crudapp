@@ -1,0 +1,162 @@
+@model crudapp.Models.Penumpang
+@{
+    var successMessage = TempData["SuccessMessage"];
+    var errorMessage = TempData["ErrorMessage"];
+}
+
+@if (successMessage != null)
+{
+    <div class="alert alert-success">
+        @successMessage
+    </div>
+}
+
+@if (errorMessage != null)
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Tambah Penumpang";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Penumpangan" asp-action="Create" method="post">
+    <div class="form-group">
+        <label class="control-label">Kapasitas Unit: @ViewBag.Kapasitas</label>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdUnit" class="control-label"></label>
+        <input asp-for="IdUnit" value="@ViewBag.UnitId" readonly class="form-control" />
+        <span asp-validation-for="IdUnit" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Nama" class="control-label"></label>
+        <input asp-for="Nama" class="form-control" />
+        <span asp-validation-for="Nama" required class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NIK" class="control-label"></label>
+        <input asp-for="NIK" class="form-control" />
+        <span asp-validation-for="NIK" required class="text-danger"></span>
+    </div>
+
+    <!-- Tujuan -->
+    <div class="form-group">
+        <label asp-for="Tujuan" class="control-label"></label>
+        <input asp-for="Tujuan" class="form-control" />
+        <span asp-validation-for="Tujuan" required class="text-danger"></span>
+    </div>
+
+    <!-- Jam Berangkat -->
+    <div class="form-group">
+        <label asp-for="JamBerangkat" class="control-label"></label>
+        <input asp-for="JamBerangkat" type="time" class="form-control" />
+        <span asp-validation-for="JamBerangkat" required class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Pilih Tempat Duduk:</label>
+        <div class="seat-grid" id="seatGrid">
+            @for (int i = 1; i <= ViewBag.Kapasitas; i++)
+            {
+                var isOccupied = ViewBag.OccupiedSeats != null && ((List<int>)ViewBag.OccupiedSeats).Contains(i);
+                <button type="button" class="btn seat-button @(isOccupied ? "btn-danger" : "btn-outline-primary")"
+                    data-seat="@i" @(isOccupied ? "disabled" : "")>
+                    Seat @i
+                </button>
+            }
+        </div>
+        <input asp-for="TempatDuduk" id="TempatDuduk" type="hidden" />
+        <span asp-validation-for="TempatDuduk" class="text-danger"></span>
+    </div>
+
+    <!-- Tombol untuk Kirim Form -->
+    <div class="modal-footer">
+        <a class="btn btn-secondary" asp-area="" asp-controller="Home" asp-action="Index">Batal</a>
+        <button type="submit" class="btn btn-success">Pesan</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.seat-button:not([disabled])').forEach(function (button) {
+            button.addEventListener('click', function () {
+                // Reset semua tombol ke default
+                document.querySelectorAll('.seat-button').forEach(function (btn) {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-outline-primary');
+                });
+                // Tandai tombol yang dipilih
+                button.classList.remove('btn-outline-primary');
+                button.classList.add('btn-primary');
+
+                // Simpan pilihan tempat duduk
+                document.getElementById('TempatDuduk').value = button.getAttribute('data-seat');
+            });
+        });
+    </script>
+}
+
+<style>
+    /* Styling untuk grid tempat duduk */
+    .seat-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        justify-items: center;
+        margin-top: 20px;
+    }
+
+    .seat-button {
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+        background-color: #32d800;
+        border: 1px solid #e0e0e0;
+        color: #007bff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .seat-button:hover {
+        background-color: #e0e0e0;
+        color: #32d800;
+    }
+
+    .seat-button.btn-primary {
+        background-color: #e0e0e0;
+        color: #32d800;
+    }
+
+    .seat-button.btn-outline-primary {
+        background-color: #32d800;
+        color: #e0e0e0;
+    }
+
+    .seat-button:disabled {
+        background-color: #ff0000;
+        color: #ffffff;
+        border-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>

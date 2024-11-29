@@ -1,0 +1,58 @@
+@model IEnumerable<crudapp.Models.Penumpang>
+
+@{
+    ViewData["Title"] = "Daftar Penumpang";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- Pesan sukses atau error jika ada -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<!-- Tombol untuk menambah penumpang baru -->
+
+<!-- Tabel Daftar Penumpang -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nama</th>
+            <th>NIK</th>
+            <th>Tujuan</th>
+            <th>Jam Berangkat</th>
+            <th>Tempat Duduk</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var penumpang in Model)
+        {
+            <tr>
+                <td>@penumpang.Id</td>
+                <td>@penumpang.Nama</td>
+                <td>@penumpang.NIK</td>
+                <td>@penumpang.Tujuan</td>
+                <td>@penumpang.JamBerangkat.ToString("HH:mm")</td>
+                <td>@penumpang.TempatDuduk</td>
+                <td>
+                    <!-- Tombol Hapus -->
+                    <a asp-area="" asp-controller="Penumpangan" asp-action="Delete" asp-route-id="@penumpang.Id"
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('Apakah Anda yakin ingin menghapus penumpang ini?');">Hapus</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
